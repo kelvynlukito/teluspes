@@ -22,6 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/gedung', 'App\Http\Controllers\API\TestController@indexGedung');
 Route::post('/postGedung', 'App\Http\Controllers\API\TestController@storeGedung');
 
+
+Route::get('/ruangan/{id_gedung}', 'App\Http\Controllers\API\TestController@getRuanganByGedung');
+
+
 //get from ruangan api
 Route::get('/ruangan', 'App\Http\Controllers\API\TestController@indexRuangan');
 Route::post('/postRuangan', 'App\Http\Controllers\API\TestController@storeRuangan');

@@ -32,6 +32,17 @@ class TestController extends Controller
         ], 200);
     }
 
+    public function getRuanganByGedung($id_gedung)
+    {
+        $ruangans = Ruangan::where('id_gedung', $id_gedung)->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Daftar data ruangan',
+            'data' => $ruangans
+        ], 200);
+    }
+    
+
     public function indexUser()
     {
         $user = User::all();

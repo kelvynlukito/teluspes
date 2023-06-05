@@ -33,3 +33,6 @@ Route::post('/postRuangan', 'App\Http\Controllers\API\TestController@storeRuanga
 //get from user api
 Route::get('/user', 'App\Http\Controllers\API\TestController@indexUser');
 Route::post('/postUser', 'App\Http\Controllers\API\TestController@storeUser');
+
+Route::post('/login', 'App\Http\Controllers\UserController@login');
+

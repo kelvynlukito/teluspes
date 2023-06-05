@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
@@ -98,4 +99,23 @@ class UserController extends Controller
 
         return redirect()->route('user.index');
     }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+    
+        if (Auth::attempt($credentials)) {
+            // Autentikasi berhasil
+            $user = Auth::user();
+            return response()->json([
+                'message' => 'Login berhasil',
+                'name' => $user->name,
+                'id' => $user->id
+            ], 200);
+        } else {
+            // Autentikasi gagal
+            return response()->json(['message' => 'Login gagal'], 401);
+        }
+    }
+    
 }

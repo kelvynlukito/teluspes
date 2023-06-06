@@ -30,7 +30,28 @@ class ReservasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //create data to database
+        $request->validate([
+            'nim' => 'required',
+            'id_ruangan' => 'required',
+            'tanggal' => 'required|date',
+            'jam_mulai' => 'required',
+            'jam_selesai' => 'required',
+            'keperluan' => 'nullable',
+            'status' => 'required',
+            
+        ]);
+
+        //create data to database
+        Gedung::create([
+            'nim' => $request->nim,
+            'id_ruangan' => $request->id_ruangan,
+            'tanggal' => $request->tanggal,
+            'jam_mulai' => $request->jam_mulai,
+            'jam_selesai' => $request->jam_selesai,
+            'keperluan' => $request->keperluan,
+            'status' => $request->status,
+        ]);
     }
 
     /**

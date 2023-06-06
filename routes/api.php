@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/gedung', 'App\Http\Controllers\API\TestController@indexGedung');
 Route::post('/postGedung', 'App\Http\Controllers\API\TestController@storeGedung');
 
-
+//get from gedung
 Route::get('/ruangan/{id_gedung}', 'App\Http\Controllers\API\TestController@getRuanganByGedung');
 
 
@@ -34,5 +34,10 @@ Route::post('/postRuangan', 'App\Http\Controllers\API\TestController@storeRuanga
 Route::get('/user', 'App\Http\Controllers\API\TestController@indexUser');
 Route::post('/postUser', 'App\Http\Controllers\API\TestController@storeUser');
 
+//post login 
 Route::post('/login', 'App\Http\Controllers\UserController@login');
+
+//post reservation data
+Route::post('/postReservasi', 'App\Http\Controllers\API\TestController@storeReservasi');
+Route::get('/reservasi', 'App\Http\Controllers\API\TestController@indexReservasi');
 

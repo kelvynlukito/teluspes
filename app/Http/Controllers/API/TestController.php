@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Gedung;
 use App\Models\ruangan;
 use App\Models\User;
+use App\Models\Reservasi;
 
 class TestController extends Controller
 {
@@ -50,6 +51,16 @@ class TestController extends Controller
             'success' => true,
             'message' => 'Daftar data user',
             'data' => $user
+        ], 200);
+    }
+
+    public function indexReservasi()
+    {
+        $reservasi = Reservasi::all();
+        return response()->json([
+            'success' => true,
+            'message' => 'Daftar data reservasir',
+            'data' => $reservasi
         ], 200);
     }
 
@@ -138,6 +149,44 @@ class TestController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Daftar data user',
+            ], 500);
+        }
+    }
+
+    public function storeReservasi(Request $request)
+    {
+        try {
+
+            //create data to database
+            $request->validate([
+                'nim' => 'required',
+                'id_ruangan' => 'required',
+                'tanggal' => 'required|date',
+                'jam_mulai' => 'required',
+                'jam_selesai' => 'required',
+                'keperluan' => 'nullable',
+                'status' => 'required',
+            ]);
+
+            //create data to database
+            Gedung::create([
+                'nim' => $request->nim,
+                'id_ruangan' => $request->id_ruangan,
+                'tanggal' => $request->tanggal,
+                'jam_mulai' => $request->jam_mulai,
+                'jam_selesai' => $request->jam_selesai,
+                'keperluan' => $request->keperluan,
+                'status' => $request->status,
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Daftar data reservasi',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Daftar data reservasi',
             ], 500);
         }
     }
